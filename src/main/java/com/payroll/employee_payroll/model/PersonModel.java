@@ -1,11 +1,18 @@
 package com.payroll.employee_payroll.model;
 
 public class PersonModel {
+	int id;
 	String fname;
 	String lname;
 	char gender;
 	int age;
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getFname() {
 		return fname;
 	}

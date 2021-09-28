@@ -1,31 +1,52 @@
 package com.payroll.employee_payroll.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.payroll.employee_payroll.model.PersonModel;
+import com.payroll.employee_payroll.service.AddressBookServiceLayer;
 
 @RestController
 public class AddressBookController {
 	
-	@GetMapping("/getAdd")
-	public String getAdd() {
-		return "displaying all the contacts";
+	@Autowired
+	AddressBookServiceLayer asl;
+	
+	@PostMapping("/getAdd")
+	public PersonModel addPerson(@RequestBody PersonModel pm) {
+		asl.add(pm);
+		return pm;
+	}
+	
+	@GetMapping("/findAll")
+	public List<PersonModel> getAllAdd(){
+		return asl.getAllAdd();
 	}
 	
 	@GetMapping("/getAdd/{id}")
-	public String getAddById(@RequestParam(value = "id")int id) {
-		return "displaying id contact";
+	public PersonModel getAddById(@PathVariable(value = "id") int id) {
+		return asl.finById(id);
 	}
 	
 	@PutMapping("/putAdd/{id}")
-	public String putAdd(@RequestParam(value = "id")int id) {
-		return "updating in contact";
+	public PersonModel putAdd(@PathVariable(value = "id") int id, @RequestBody PersonModel pm) {
+		asl.put(id, pm);
+		return pm;
 	}
 	
 	@DeleteMapping("/deleteAdd/{id}")
-	public String deleteAdd(@RequestParam(value = "id")int id) {
-		return "updating in contact";
+	public String deleteAdd(@PathVariable(value = "id") int id) {
+		asl.delete(id);
+		return "Contact deleted";
 	}
 }
