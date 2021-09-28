@@ -49,4 +49,5 @@ public class AddressBookController {
 		asl.delete(id);
 		return "Contact deleted";
 	}
+	
 }
