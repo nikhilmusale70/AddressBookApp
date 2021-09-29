@@ -1,7 +1,10 @@
 package com.payroll.employee_payroll.service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
+import javax.validation.constraints.Null;
 
 import org.springframework.stereotype.Service;
 import com.payroll.employee_payroll.model.PersonModel;
@@ -9,10 +12,12 @@ import com.payroll.employee_payroll.model.PersonModel;
 @Service
 public class AddressBookServiceLayer {
 
-	ArrayList<PersonModel> personList = new ArrayList<>();
-	
+	List<PersonModel> personList = new ArrayList<>();
+
 	public void add(PersonModel pm) {
-		personList.add(pm);
+		int index = personList.size();
+		pm.setId(index);
+		personList.add(index, pm);
 	}
 	
 	public List<PersonModel> getAllAdd() {
