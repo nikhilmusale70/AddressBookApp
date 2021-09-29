@@ -14,6 +14,8 @@ public class AddressBookAapApplication {
 		
 		log.info("Employee Payroll App started in {} Envoronment",
 			context.getEnvironment().getProperty("environment"));
+		log.info("Employee Payroll App started in {} Envoronment",
+				context.getEnvironment().getProperty("spring.datasource.username"));
 	}
 
 }

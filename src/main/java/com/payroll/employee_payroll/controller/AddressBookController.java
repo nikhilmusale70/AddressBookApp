@@ -1,6 +1,9 @@
 package com.payroll.employee_payroll.controller;
 
 import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +23,7 @@ public class AddressBookController {
 	AddressBookServiceLayer asl;
 	
 	@PostMapping("/add")
-	public PersonModel addPerson(@RequestBody PersonModel pm) {
+	public PersonModel addPerson(@Valid @RequestBody PersonModel pm) {
 		asl.add(pm);
 		return pm;
 	}
