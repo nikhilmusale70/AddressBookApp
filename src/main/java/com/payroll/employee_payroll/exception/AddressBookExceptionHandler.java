@@ -2,6 +2,10 @@ package com.payroll.employee_payroll.exception;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.validation.UnexpectedTypeException;
+
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.ObjectError;
@@ -28,7 +32,25 @@ public class AddressBookExceptionHandler {
 	
 	@ExceptionHandler(IndexOutOfBoundsException.class)
 	public ResponseEntity<ResponseDTO> handleAddressNotException(IndexOutOfBoundsException exception){
-		ResponseDTO responseDTO=new ResponseDTO("Exception while Accesing address with given id",exception.getMessage());
+		ResponseDTO responseDTO=new ResponseDTO("Exception while Accesing employee with given id",exception.getMessage());
+		return new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(UnexpectedTypeException.class)
+	public ResponseEntity<ResponseDTO> handleAddressNotException(UnexpectedTypeException exception){
+		ResponseDTO responseDTO=new ResponseDTO("Exception while adding",exception.getMessage());
+		return new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(EmptyResultDataAccessException.class)
+	public ResponseEntity<ResponseDTO> handleAddressNotException(EmptyResultDataAccessException exception){
+		ResponseDTO responseDTO=new ResponseDTO("No id is there",exception.getMessage());
+		return new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(NullPointerException.class)
+	public ResponseEntity<ResponseDTO> handleAddressNotException(NullPointerException exception){
+		ResponseDTO responseDTO=new ResponseDTO("No such id is there",exception.getMessage());
 		return new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.BAD_REQUEST);
 	}
 }
