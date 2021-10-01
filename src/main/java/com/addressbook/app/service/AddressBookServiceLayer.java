@@ -1,17 +1,16 @@
-package com.payroll.employee_payroll.service;
+package com.addressbook.app.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.payroll.employee_payroll.Entity.Employee;
-import com.payroll.employee_payroll.model.PersonModel;
-import com.payroll.employee_payroll.repo.AddRepo;
+import com.addressbook.app.entity_dto.PersonModel;
+import com.addressbook.app.exception.AddressBookException;
+import com.addressbook.app.repo.AddRepo;
 
 @Service
-public class AddressBookServiceLayer {
+public class AddressBookServiceLayer implements InterfaceAddressService{
 
 	@Autowired
 	AddRepo addRepo;
@@ -25,11 +24,11 @@ public class AddressBookServiceLayer {
 	}
 	
 	public PersonModel finById(int id) {
-		return addRepo.findById(id).orElse(null);
+		return addRepo.findById(id).orElseThrow(()->new AddressBookException("Id not found"));
 	}
 	
 	public void put(int id,PersonModel pm) {
-		PersonModel personModel = addRepo.findById(id).orElse(null);
+		PersonModel personModel = addRepo.findById(id).orElseThrow(()->new AddressBookException("Id not found"));
 		personModel.setFname(pm.getFname());
 		personModel.setLname(pm.getLname());
 		personModel.setAddress(pm.getAddress());

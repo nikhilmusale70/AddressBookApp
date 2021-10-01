@@ -1,4 +1,4 @@
-package com.payroll.employee_payroll.exception;
+package com.addressbook.app.exception;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,7 +12,8 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import com.payroll.employee_payroll.entity_dto.ResponseDTO;
+
+import com.addressbook.app.entity_dto.ResponseDTO;
 
 
 @ControllerAdvice
@@ -50,6 +51,18 @@ public class AddressBookExceptionHandler {
 	
 	@ExceptionHandler(NullPointerException.class)
 	public ResponseEntity<ResponseDTO> handleAddressNotException(NullPointerException exception){
+		ResponseDTO responseDTO=new ResponseDTO("No such id is there",exception.getMessage());
+		return new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(AddressBookException.class)
+	public ResponseEntity<ResponseDTO> handleCustomException(AddressBookException exception){
+		ResponseDTO responseDTO=new ResponseDTO("No such id is there",exception.getMessage());
+		return new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<ResponseDTO> handleEveryException(Exception exception){
 		ResponseDTO responseDTO=new ResponseDTO("No such id is there",exception.getMessage());
 		return new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.BAD_REQUEST);
 	}

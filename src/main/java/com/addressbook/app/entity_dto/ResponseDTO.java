@@ -1,4 +1,4 @@
-package com.payroll.employee_payroll.entity_dto;
+package com.addressbook.app.entity_dto;
 
 import lombok.Data;
 

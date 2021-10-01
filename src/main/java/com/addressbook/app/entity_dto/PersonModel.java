@@ -1,4 +1,4 @@
-package com.payroll.employee_payroll.model;
+package com.addressbook.app.entity_dto;
 
 import java.util.List;
 import javax.persistence.CollectionTable;
@@ -23,7 +23,6 @@ public @Data class PersonModel {
 	@Column(name = "addId")
 	int id;
 	
-	@Pattern(regexp = "^[A-Z]{1}[a-zA-Z\\s]{2,}$", message ="First Name invalid")
 	@Column(name = "fname")
 	String fname;
 	

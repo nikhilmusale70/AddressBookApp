@@ -1,4 +1,4 @@
-package com.payroll.employee_payroll.controller;
+package com.addressbook.app.controller;
 
 import java.util.List;
 
@@ -13,40 +13,40 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.payroll.employee_payroll.model.PersonModel;
-import com.payroll.employee_payroll.service.AddressBookServiceLayer;
+import com.addressbook.app.entity_dto.PersonModel;
+import com.addressbook.app.service.InterfaceAddressService;
 
 @RestController
 public class AddressBookController {
 	
 	@Autowired
-	AddressBookServiceLayer asl;
+	InterfaceAddressService interfaceAddressService;
 	
 	@PostMapping("/add")
 	public PersonModel addPerson(@Valid @RequestBody PersonModel pm) {
-		asl.add(pm);
+		interfaceAddressService.add(pm);
 		return pm;
 	}
 	
 	@GetMapping("/findAll")
 	public List<PersonModel> getAllAdd(){
-		return asl.getAllAdd();
+		return interfaceAddressService.getAllAdd();
 	}
 	
 	@GetMapping("/getAdd/{id}")
 	public PersonModel getAddById(@PathVariable(value = "id") int id) {
-		return asl.finById(id);
+		return interfaceAddressService.finById(id);
 	}
 	
 	@PutMapping("/putAdd/{id}")
 	public PersonModel putAdd(@PathVariable(value = "id") int id, @RequestBody PersonModel pm) {
-		asl.put(id, pm);
+		interfaceAddressService.put(id, pm);
 		return pm;
 	}
 	
 	@DeleteMapping("/deleteAdd/{id}")
 	public String deleteAdd(@PathVariable(value = "id") int id) {
-		asl.delete(id);
+		interfaceAddressService.delete(id);
 		return "Contact deleted";
 	}
 	
